@@ -148,16 +148,26 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
          * very same name. Remember that you must also redefine hashCode()!
          */
     	private final String name;
-    	private final int hashCode;
+    	private int hashCode;
     	
         public Sport(final String name) {
 			this.name = name;
 			this.hashCode = name.hashCode();
 		}
 
+        public int hashCode() {
+        	if (hashCode == 0) {
+                hashCode = name.hashCode();
+            }
+			return hashCode;
+        }
+        
 		@Override
         public boolean equals(final Object o) {
-            return hashCode == o.hashCode();
+			if (getClass().equals(o.getClass())) {
+                return name.equals(((Sport) o).name);
+            }
+            return false;
         }
     }
 }
