@@ -1,11 +1,14 @@
 package it.unibo.oop.lab.anonymous1;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUser;
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
 import it.unibo.oop.lab.socialnetwork.User;
+//import jdk.javadoc.internal.doclets.toolkit.util.Comparators;
 
 /**
  * Instruction: define two comparators as anonymous classes in oder to sort a
@@ -74,7 +77,13 @@ public final class TestAnonymousComparator {
          * 
          * REFER TO LESSON 13-Advanced-Mechanisms.pdf, slide 41
          */
-        // TODO
+        final var byAge = new Comparator <User>() {
+			public int compare(final User o1, final User o2) {
+				return Integer.compare(o1.getAge(), o2.getAge());
+			}
+        };
+        Collections.sort(denzelUsers, byAge);
+        
         /*
          * expected Result
          */
@@ -105,7 +114,8 @@ public final class TestAnonymousComparator {
          * NOTE: in order to sort a list think about a method of the utility
          * class Collections
          */
-        // TODO
+        Collections.sort(rossiUsers, byAge.reversed());
+        
         /*
          * expected Result
          */
